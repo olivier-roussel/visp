@@ -42,7 +42,7 @@ jobs:
         shell: bash -el {0}
         run: df -h
 
-      - uses: prefix-dev/setup-pixi@v0.8.8
+      - uses: prefix-dev/setup-pixi@v0.8.0
         with:
           cache: true
           environments: ${{ matrix.environment }}
