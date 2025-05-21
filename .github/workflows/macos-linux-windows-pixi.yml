@@ -42,12 +42,12 @@ jobs:
         shell: bash -el {0}
         run: df -h
 
-      - uses: prefix-dev/setup-pixi@v0.8.0
+      - uses: prefix-dev/setup-pixi@v0.8.8
         with:
           cache: true
           environments: ${{ matrix.environment }}
           log-level: vvv
-          pixi-version: v0.46.0
+          pixi-version: v0.41.1
         env:
           RUNNER_DEBUG: true
 
