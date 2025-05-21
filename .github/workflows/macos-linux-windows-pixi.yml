@@ -40,6 +40,7 @@ jobs:
         with:
           cache: true
           environments: ${{ matrix.environment }}
+        env:
           RUNNER_DEBUG: true
 
       - name: Build Visp [MacOS/Linux/Windows]
