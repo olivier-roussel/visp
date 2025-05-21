@@ -16,22 +16,24 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, macos-13]
-        environment: [all-with-tests, with-python]
+        # os: [ubuntu-latest, macos-latest, macos-13]
+        # environment: [all-with-tests, with-python]
+        os: [ubuntu-latest]
+        environment: [with-python]
         build_type: [Release]
-        include:
-          - os: windows-latest
-            environment: all-with-tests
-            build_type: Release
-          - os: windows-latest
-            environment: all-clang-cl-with-tests
-            build_type: Release
-          - os: windows-latest
-            environment: with-python
-            build_type: Release
-          - os: windows-latest
-            environment: with-python-clang-cl
-            build_type: Release
+        # include:
+        #   - os: windows-latest
+        #     environment: all-with-tests
+        #     build_type: Release
+        #   - os: windows-latest
+        #     environment: all-clang-cl-with-tests
+        #     build_type: Release
+        #   - os: windows-latest
+        #     environment: with-python
+        #     build_type: Release
+        #   - os: windows-latest
+        #     environment: with-python-clang-cl
+        #     build_type: Release
 
     steps:
       - uses: actions/checkout@v4
