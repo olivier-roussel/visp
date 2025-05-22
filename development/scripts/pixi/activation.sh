@@ -12,3 +12,6 @@ export VISP_EXTRA_CMAKE_ARGS=""
 
 export VISP_BUILD_TESTS=${VISP_BUILD_TESTS:=OFF}
 export VISP_BUILD_DIR=$CONDA_PREFIX/visp-build
+
+Xvfb :99 -screen 0 1280x1024x24 -nolisten tcp &
+export DISPLAY=:99
