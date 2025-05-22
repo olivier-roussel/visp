@@ -32,6 +32,7 @@ jobs:
         if: contains(matrix.environment, 'default')
         shell: bash -el {0}
         run: |
+          which Xvfb
           Xvfb :99 -screen 0 1280x1024x24 -nolisten tcp &
           export DISPLAY=:99
 
