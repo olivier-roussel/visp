@@ -43,59 +43,8 @@ llvm-openmp = "*"
 [activation]
 scripts = ["development/scripts/pixi/activation.sh"]
 
+[target.linux.activation]
+scripts = ["development/scripts/pixi/activation.sh", "development/scripts/pixi/activation_xvfb.sh"]
+
 [target.win-64.activation]
 scripts = ["development/scripts/pixi/activation.bat"]
-
-# Use clang-cl on Windows
-# We must use scripts instead of env to setup CC and CXX
-# to avoid cxx-compiler to overwrite them.
-[feature.clang-cl]
-platforms = ["win-64"]
-dependencies = { clang = "*", llvm-openmp = "*" }
-activation = { scripts = ["development/scripts/pixi/activation_clang_cl.bat"] }
-
-[feature.python-bindings]
-dependencies = { python = ">=3.8", pybind11 = "*", pip = "*" }
-[feature.python-bindings.tasks]
-build = { cmd = "cmake --build $VISP_BUILD_DIR --parallel $CPU_COUNT --target visp_python_bindings", depends-on = ["install"] }
-python-test = { cmd = "cmake --build $VISP_BUILD_DIR --config Release --target visp_python_bindings_test", depends-on = ["build"] }
-
-[feature.rbt]
-dependencies = { nlohmann_json = "*", panda3d = { version = ">=1.10.15", channel = "panda3d-forge" } }
-
-[feature.tests]
-activation = { env = { VISP_BUILD_TESTS = "ON" } }
-# Tests that require display / rendering are only supported on linux based CI
-[feature.tests.target.linux]
-activation = { env = { VISP_ENABLE_TEST_WITHOUT_DISPLAY = "OFF" } }
-
-[tasks]
-configure = { cmd = [
-  "cmake",
-  "-G",
-  "Ninja",
-  "-B",
-  "$VISP_BUILD_DIR",
-  "-S",
-  ".",
-  "-DCMAKE_VERBOSE_MAKEFILE=ON", # TODO : enable on CI, disable by default
-  "-DCMAKE_BUILD_TYPE=$VISP_BUILD_TYPE",
-  "-DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX",
-  "-DBUILD_TESTS=$VISP_BUILD_TESTS",
-  "-DBUILD_TUTORIALS=OFF",
-  "-DBUILD_EXAMPLES=OFF",
-  "$VISP_EXTRA_CMAKE_ARGS"
-] }
-build-base = { cmd = "cmake --build $VISP_BUILD_DIR --parallel $CPU_COUNT", depends-on = ["configure"] }
-build = { depends-on = ["build-base"]}
-install = { cmd = "cmake --build $VISP_BUILD_DIR --target install", depends-on = ["build-base"] }
-clean = { cmd = "rm -rf $VISP_BUILD_DIR" }
-test = { cmd = "ctest --test-dir $VISP_BUILD_DIR --output-on-failure", depends-on = ["install"] }
-
-[environments]
-with-python = { features = ["python-bindings"] }
-with-python-clang-cl = { features = ["python-bindings", "clang-cl"] }
-all = { features = ["rbt", "python-bindings"] }
-all-clang-cl = { features = ["rbt", "python-bindings", "clang-cl"] }
-all-with-tests = { features = ["rbt", "python-bindings", "tests"] }
-all-clang-cl-with-tests = { features = ["rbt", "python-bindings", "clang-cl", "tests"] }

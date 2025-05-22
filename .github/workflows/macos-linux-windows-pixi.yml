@@ -19,7 +19,7 @@ jobs:
         # os: [ubuntu-latest, macos-latest, macos-13]
         # environment: [all-with-tests, with-python]
         os: [ubuntu-24.04, ubuntu-22.04]
-        environment: [with-python]
+        environment: [default]
         build_type: [Release]
         # include:
         #   - os: windows-latest
