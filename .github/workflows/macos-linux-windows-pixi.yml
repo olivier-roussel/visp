@@ -36,7 +36,7 @@ jobs:
           Xvfb :99 -screen 0 1280x1024x24 -nolisten tcp &
           export DISPLAY=:99
 
-      - name: Hello world
+      - name: Pixi show which Xvfb
         shell: bash -el {0}
         run: |
-          echo "Hello world"
+          pixi run show

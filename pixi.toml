@@ -10,5 +10,8 @@ eigen = "*"
 [feature.xvfb.activation]
 scripts = ["development/scripts/pixi/activation_xvfb.sh"]
 
+[tasks]
+show = { cmd = "which Xvfb" }
+
 [environments]
 with-pixi-xvfb = { features = ["xvfb"] }
