@@ -28,13 +28,13 @@ jobs:
           environments: ${{ matrix.environment }}
           pixi-version: v0.47.0
 
-      - name: Start Xvfb [default]
-        if: contains(matrix.environment, 'default')
-        shell: bash -el {0}
-        run: |
-          which Xvfb
-          Xvfb :99 -screen 0 1280x1024x24 -nolisten tcp &
-          export DISPLAY=:99
+      # - name: Start Xvfb [default]
+      #   if: contains(matrix.environment, 'default')
+      #   shell: bash -el {0}
+      #   run: |
+      #     which Xvfb
+      #     Xvfb :99 -screen 0 1280x1024x24 -nolisten tcp &
+      #     export DISPLAY=:99
 
       - name: Pixi show which Xvfb
         shell: bash -el {0}
