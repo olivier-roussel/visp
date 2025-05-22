@@ -18,7 +18,7 @@ jobs:
       matrix:
         # os: [ubuntu-latest, macos-latest, macos-13]
         # environment: [all-with-tests, with-python]
-        os: [ubuntu-latest]
+        os: [ubuntu-24.04, ubuntu-22.04]
         environment: [with-python]
         build_type: [Release]
         # include:
