@@ -37,8 +37,5 @@ librealsense = "*"
 [target.linux-64.dependencies]
 mesa-libegl-cos7-x86_64 = "*"
 
-[target.osx.dependencies]
-llvm-openmp = "*"
-
 [activation]
 scripts = ["development/scripts/pixi/activation.sh"]
