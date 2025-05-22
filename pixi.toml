@@ -8,7 +8,7 @@ platforms = ["linux-64"]
 eigen = "*"
 
 [feature.xvfb.activation]
-scripts = ["development/scripts/pixi/activation_xvfb.sh"]
+cmd = ["Xvfb :99 -screen 0 1280x1024x24 -nolisten tcp &"]
 
 [tasks]
 show = { cmd = "which Xvfb" }
