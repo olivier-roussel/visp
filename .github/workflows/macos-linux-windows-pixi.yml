@@ -40,3 +40,8 @@ jobs:
         shell: bash -el {0}
         run: |
           pixi run show
+
+      - name: Pixi start Xvfb
+        shell: bash -el {0}
+        run: |
+          pixi run start

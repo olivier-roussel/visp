@@ -12,6 +12,7 @@ scripts = ["development/scripts/pixi/activation_xvfb.sh"]
 
 [tasks]
 show = { cmd = "which Xvfb" }
+start = { cmd = "Xvfb :99 -screen 0 1280x1024x24 -nolisten tcp &"}
 
 [environments]
 with-pixi-xvfb = { features = ["xvfb"] }
