@@ -43,9 +43,6 @@ llvm-openmp = "*"
 [activation]
 scripts = ["development/scripts/pixi/activation.sh"]
 
-[target.linux.activation]
-scripts = ["development/scripts/pixi/activation.sh", "development/scripts/pixi/activation_xvfb.sh"]
-
 [target.win-64.activation]
 scripts = ["development/scripts/pixi/activation.bat"]
 
@@ -81,11 +78,10 @@ configure = { cmd = [
   "$VISP_BUILD_DIR",
   "-S",
   ".",
-  "-DCMAKE_VERBOSE_MAKEFILE=ON",
+  "-DCMAKE_VERBOSE_MAKEFILE=ON", # TODO : enable on CI, disable by default
   "-DCMAKE_BUILD_TYPE=$VISP_BUILD_TYPE",
   "-DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX",
   "-DBUILD_TESTS=$VISP_BUILD_TESTS",
-  "-DENABLE_TEST_WITHOUT_DISPLAY=$VISP_ENABLE_TEST_WITHOUT_DISPLAY",
   "-DBUILD_TUTORIALS=OFF",
   "-DBUILD_EXAMPLES=OFF",
   "$VISP_EXTRA_CMAKE_ARGS"
