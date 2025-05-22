@@ -47,7 +47,7 @@ jobs:
           cache: true
           environments: ${{ matrix.environment }}
           log-level: vvv
-          pixi-version: v0.41.1
+          pixi-version: v0.47.0
         env:
           RUNNER_DEBUG: true
 
