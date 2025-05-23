@@ -5,13 +5,16 @@ platforms = ["linux-64"]
 [dependencies]
 panda3d = { version = ">=1.10.15", channel = "panda3d-forge" }
 
-[feature.xvfb.activation]
-scripts = ["development/scripts/pixi/activation_xvfb.sh"]
+# [feature.xvfb.activation]
+# scripts = ["development/scripts/pixi/activation_xvfb.sh"]
+
+[feature.xvfb.tasks]
+init = { cmd = "bash ./development/scripts/pixi/xvfb.sh" }
 
 [tasks]
 show = { cmd = "which Xvfb" }
-start = { cmd = "bash ./development/scripts/pixi/xvfb.sh" }
-test = { cmd = "python test_backend_offscreen.py" }
+init = { cmd = "echo \"Default init\"" }
+test = { cmd = "python test_backend_offscreen.py", depends-on = ["init"] }
 # start = { cmd = "Xvfb :99 -screen 0 1280x1024x24 -nolisten tcp &"}
 
 [environments]

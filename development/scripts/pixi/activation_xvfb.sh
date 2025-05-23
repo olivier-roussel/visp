@@ -1,3 +1,5 @@
 #! /bin/bash
 
-bash ./xvfb.sh
+export DUMMY1=1
+bash ./xvfb.sh &
+export DUMMY2=1
