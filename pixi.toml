@@ -10,7 +10,7 @@ scripts = ["development/scripts/pixi/activation_xvfb.sh"]
 
 [tasks]
 show = { cmd = "which Xvfb" }
-start = { cmd = "bash ./development/scripts/pixi/activation_xvfb.sh"}
+start = { cmd = "bash ./development/scripts/pixi/xvfb.sh"}
 # start = { cmd = "Xvfb :99 -screen 0 1280x1024x24 -nolisten tcp &"}
 
 [environments]
