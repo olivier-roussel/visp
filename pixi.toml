@@ -8,7 +8,7 @@ panda3d = { version = ">=1.10.15", channel = "panda3d-forge" }
 # [feature.xvfb.activation]
 # scripts = ["development/scripts/pixi/activation_xvfb.sh"]
 
-[feature.xvfb.env]
+[feature.xvfb.activation.env]
 DISPLAY = ":99"
 
 [feature.xvfb.tasks]
