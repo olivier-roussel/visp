@@ -55,5 +55,5 @@ jobs:
       - name: Run backend test (offscreen)
         shell: bash -l {0}
         run: |
-          pixi run test
+          pixi run -e ${{ matrix.environment }} test
           file test.jpg
