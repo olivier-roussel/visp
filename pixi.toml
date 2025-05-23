@@ -15,8 +15,6 @@ DISPLAY = ":99"
 init = { cmd = "bash ./development/scripts/pixi/xvfb.sh" }
 
 [tasks]
-show = { cmd = "which Xvfb" }
-init = { }
 test = { cmd = "python test_backend_offscreen.py", depends-on = ["init"] }
 # start = { cmd = "Xvfb :99 -screen 0 1280x1024x24 -nolisten tcp &"}
 
