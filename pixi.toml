@@ -2,6 +2,9 @@
 channels = ["conda-forge"]
 platforms = ["linux-64"]
 
+[dependencies]
+eigen = "*"
+
 [feature.xvfb.activation]
 scripts = ["development/scripts/pixi/activation_xvfb.sh"]
 
