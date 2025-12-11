@@ -1,11 +1,70 @@
 [workspace]
 authors = ["Olivier Roussel <olivier.roussel@inria.fr>"]
-channels = ["conda-forge", "https://prefix.dev/panda3d-forge"]
+channels = ["https://prefix.dev/conda-forge", "https://prefix.dev/panda3d-forge"]
 name = "visp"
 platforms = ["linux-64", "linux-aarch64", "osx-64", "win-64", "osx-arm64"]
 version = "3.6.0"
 license = "GPL-2.0-only"
 license-file = "LICENSE.txt"
+preview = ["pixi-build"]
+
+[package]
+name = { workspace = true }
+version = { workspace = true }
+
+[package.build.backend]
+name = "pixi-build-cmake"
+version = "0.3.*"
+channels = ["https://prefix.dev/conda-forge", "https://prefix.dev/panda3d-forge"]
+
+[package.build.config]
+extra-args = [
+  "-DBUILD_TESTS=OFF",
+  "-DENABLE_TEST_WITHOUT_DISPLAY=ON",
+  "-DBUILD_TUTORIALS=OFF",
+  "-DBUILD_EXAMPLES=OFF",
+  "-DUSE_MATHJAX=OFF",
+  "-DBUILD_COVERAGE=OFF",
+  "-DBUILD_DEPRECATED_FUNCTIONS=OFF",
+  "-DVISP_HAVE_OPENCV_HEADLESS=OFF"
+]
+
+[package.build-dependencies]
+pkg-config = ">=0.29.2"
+
+[package.host-dependencies]
+eigen = "*"
+libjpeg-turbo = "*"
+libpng = "*"
+libblas = "*"
+libcblas = "*"
+liblapack = "*"
+liblapacke = "*"
+coin3d = "*"
+nlohmann_json = "*"
+ogre = ">=14.4.1"
+libxml2-devel = "*"
+librealsense = "*"
+libopencv = { version = ">=4.12.0", build = "qt*" }
+panda3d = { version = ">=1.10.15", channel = "https://prefix.dev/panda3d-forge" }
+
+[package.target.unix.host-dependencies]
+xorg-libx11 = "*"
+xorg-libxfixes = "*"
+xorg-xorgproto = "*"
+libdc1394 = ">=2.2.6"
+gsl = "*"
+# gtk2 = "*"
+# glib = "*"
+
+[package.target.linux-64.host-dependencies]
+zbar = "*"
+
+[package.target.osx.host-dependencies]
+llvm-openmp = "*"
+zbar = "*"
+
+# [package.run-dependencies]
 
 # TODO: add ccache support
 [dependencies]
@@ -13,7 +72,7 @@ cxx-compiler = ">=1.7.0"
 cmake = ">=3.22"
 ninja = ">=1.11"
 pkg-config = ">=0.29.2"
-git = ">=2.47.0"
+# git = ">=2.47.0"
 eigen = "*"
 libjpeg-turbo = "*"
 libpng = "*"
@@ -170,6 +229,18 @@ VISP_BUILD_EXAMPLES = "ON"
 [feature.tutorials.activation.env]
 VISP_BUILD_TUTORIALS = "ON"
 
+[feature.test-pixi-build.dependencies]
+visp = { path = "." }
+cmake = ">=3.22"
+cxx-compiler = "*"
+python = "*"
+
+[feature.test-pixi-build.tasks]
+test-cmake = "cmake -S demo/ -B build_test_pixi_build"
+# test-python = "python -c 'import visp'"
+# test = { depends-on = ["test-cmake", "test-python"] }
+test = { depends-on = ["test-cmake"] }
+
 [tasks]
 init-testing = {}
 echo-env = { cmd = "env" }
@@ -194,7 +265,6 @@ configure = { cmd = [
   "-DUSE_GTK2=$VISP_USE_GTK2",
   "-DVISP_HAVE_OPENCV_HEADLESS=$VISP_HAVE_OPENCV_HEADLESS",
   "-DDOXYGEN_AWESOME_DIR=$DOXYGEN_AWESOME_DIR",
-
   "$VISP_EXTRA_CMAKE_ARGS"
 ], depends-on = ["echo-env"] }
 build-modules = { cmd = "cmake --build $VISP_BUILD_DIR --target visp_modules --parallel $CPU_COUNT", depends-on = ["configure"] }
@@ -224,3 +294,4 @@ full-ci-coverage-clang-cl = { features = ["rbt", "python-bindings", "headless", 
 full-ci-clang-cl-python-oldest = { features = ["rbt", "python-bindings", "headless", "tests", "examples", "tutorials", "clang-cl", "python-oldest"]}
 full-ci-clang-cl-python-supported = { features = ["rbt", "python-bindings", "headless", "tests", "examples", "tutorials", "clang-cl", "python-supported"]}
 # full-ci-clang-cl-python-newest = { features = ["rbt", "python-bindings", "headless", "tests", "examples", "tutorials", "clang-cl", "python-newest"]}
+test-pixi-build = { features = ["test-pixi-build"], no-default-feature = true }
