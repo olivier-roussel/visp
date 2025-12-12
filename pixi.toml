@@ -213,8 +213,8 @@ with-python-clang-cl = { features = ["python-bindings", "opencv-with-qt", "doc",
 all = { features = ["rbt", "python-bindings", "opencv-with-qt", "doc"] }
 all-clang-cl = { features = ["rbt", "python-bindings", "opencv-with-qt", "doc", "clang-cl"] }
 # All ViSP features (incl. python bindings) + tests
-all-with-tests = { features = ["rbt", "python-bindings", "opencv-with-qt", "doc", "tests"] }
-all-clang-cl-with-tests = { features = ["rbt", "python-bindings", "opencv-with-qt", "doc", "clang-cl", "tests"] }
+all-with-tests = { features = ["rbt", "python-bindings", "opencv-with-qt", "doc", "tests", "examples", "tutorials"] }
+all-clang-cl-with-tests = { features = ["rbt", "python-bindings", "opencv-with-qt", "doc", "clang-cl", "tests", "examples", "tutorials"] }
 # Environments dedicated for CI (headless)
 full-ci-python-oldest = { features = ["rbt", "python-bindings", "headless", "tests", "examples", "tutorials", "python-oldest"]}
 full-ci-python-supported = { features = ["rbt", "python-bindings", "headless", "tests", "examples", "tutorials", "python-supported"]}
